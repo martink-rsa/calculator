@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" type = "text/css" href = "./assets/css/style.css" />
-        <script src="https://kit.fontawesome.com/63c83e48fd.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:300,500&display=swap" rel="stylesheet"> 
         <title>Calculator</title>
     </head>
@@ -25,30 +25,30 @@
                     <div id="container-display-infobar">
                         <div id="display-infobar">0</div>
                         <div id="container-display-stream">0</div>
-                    </div>                                      
+                    </div>
                 </div>
-                <div id=container-controls>                    
-
+                <div id=container-controls>  
+                    <!-- Row 1 -->                  
                     <button id="btn-key-clear" class="button-main button-style-1" type="button">C</button>
                     <button id="btn-key-available" class="button-main button-style-1" type="button"></button>
                     <button id="btn-key-backspace" class="button-main button-style-1" type="button"><i class="fas fa-backspace"></i></button>
                     <button id="btn-key-divide" class="button-main button-style-1" type="button">÷</button>
-
+                    <!-- Row 2 --> 
                     <button id="btn-key-7" class="button-main button-style-2" type="button">7</button>
                     <button id="btn-key-8" class="button-main button-style-2" type="button">8</button>
                     <button id="btn-key-9" class="button-main button-style-2" type="button">9</button>
                     <button id="btn-key-multiply" class="button-main button-style-1" type="button">×</button>
-
+                    <!-- Row 3 --> 
                     <button id="btn-key-4" class="button-main button-style-2" type="button">4</button>
                     <button id="btn-key-5" class="button-main button-style-2" type="button">5</button>
                     <button id="btn-key-6" class="button-main button-style-2" type="button">6</button>
                     <button id="btn-key-minus" class="button-main button-style-1" type="button">-</button>
-
+                    <!-- Row 4 --> 
                     <button id="btn-key-1" class="button-main button-style-2" type="button">1</button>
                     <button id="btn-key-2" class="button-main button-style-2" type="button">2</button>
                     <button id="btn-key-3" class="button-main button-style-2" type="button">3</button>
                     <button id="btn-key-add" class="button-main button-style-1" type="button">+</button>
-
+                    <!-- Row 5 --> 
                     <button id="btn-key-plusminus" class="button-main button-style-1" type="button">±</button>
                     <button id="btn-key-0" class="button-main button-style-2" type="button">0</button>
                     <button id="btn-key-decimal" class="button-main button-style-1" type="button">.</button>
@@ -58,25 +58,22 @@
         </div>
         <div id="wrapper-settings">
             <div id=container-wrapper-fx>
-                
                 <div id="container-settings" >
                     <div id="settings-title">
-
                         <div id="settings-title-text">
                             <h4>Options</h4>
-
                         </div>
-                            <button id="btn-settings-closex" type="button">X</button>
+                        <button id="btn-settings-closex" type="button">X</button>
                     </div>
                     <div id="settings-contents">
-                            <div id="settings-contents-options">
-                                <div class="settings-text">Animate background:</div>
-                                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                                <div class="settings-text">Animate background:</div>
-                                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                                <div class="settings-text">Animate background:</div>
-                                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                            </div>
+                        <div id="settings-contents-options">
+                            <div class="settings-text">Animate background:</div>
+                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                            <div class="settings-text">Animate background:</div>
+                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                            <div class="settings-text">Animate background:</div>
+                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
                     </div>
                     <div id="settings-close">
                         <button id="btn-settings-close" type="button">Close</button>
@@ -84,6 +81,7 @@
                 </div>     
             </div>
         </div>
+        <script src="https://kit.fontawesome.com/63c83e48fd.js"></script>
         <script type="text/javascript" src="./assets/js/calculator.js"></script>
     </body>
 </html>

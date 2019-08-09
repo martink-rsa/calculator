@@ -4,11 +4,10 @@
         <meta charset="UTF-8">
         <link rel = "stylesheet" type = "text/css" href = "./assets/css/style.css" />
         <script src="https://kit.fontawesome.com/63c83e48fd.js"></script>
-        
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:300,500&display=swap" rel="stylesheet"> 
+        <title>Calculator</title>
     </head>
     <body>
-
         <div id="container-main">
             <div id="main-fx-overlay1"></div>
             <div id="main-fx-overlay2"></div>
@@ -19,29 +18,19 @@
                 </div>
             </div>
             <div id="container-calculator">
-                
                 <div id="container-display">
-                                        <!--<i class="fas fa-cog fa-xs img-fa-top"></i>-->
                     <div id="container-display-settings">
                         <button id="settings-icon" class="btn-settings-cog"><i class="fas fa-cog fa-2x icon-settings-cog"></i></button>
                     </div>
                     <div id="container-display-infobar">
-                        <div id="display-infobar">
-                            1000 + 9999 - 10 + 10000 + 492.50 =
-                        </div>
-                        <div id="container-display-stream"></div>
-                        
-                    </div>                       
-                    
+                        <div id="display-infobar">0</div>
+                        <div id="container-display-stream">0</div>
+                    </div>                                      
                 </div>
                 <div id=container-controls>                    
-                    <button id="btn-key-percentage" class="button-main button-style-1" type="button">%</button>                 
-                    <button id="btn-key-sqrt" class="button-main button-style-1" type="button">√</button>
-                    <button id="btn-key-root" class="button-main button-style-1" type="button">𝑥<sup>2</sup></button>
-                    <button id="btn-key-cube" class="button-main button-style-1" type="button">𝑥<sup>3</sup></button>
 
                     <button id="btn-key-clear" class="button-main button-style-1" type="button">C</button>
-                    <button id="btn-key-clear" class="button-main button-style-1" type="button">+</button>
+                    <button id="btn-key-available" class="button-main button-style-1" type="button"></button>
                     <button id="btn-key-backspace" class="button-main button-style-1" type="button"><i class="fas fa-backspace"></i></button>
                     <button id="btn-key-divide" class="button-main button-style-1" type="button">÷</button>
 
@@ -60,14 +49,13 @@
                     <button id="btn-key-3" class="button-main button-style-2" type="button">3</button>
                     <button id="btn-key-add" class="button-main button-style-1" type="button">+</button>
 
-                    <button id="btn-key-plus-minus" class="button-main button-style-1" type="button">±</button>
+                    <button id="btn-key-plusminus" class="button-main button-style-1" type="button">±</button>
                     <button id="btn-key-0" class="button-main button-style-2" type="button">0</button>
-                    <button id="btn-key-dot" class="button-main button-style-1" type="button">.</button>
+                    <button id="btn-key-decimal" class="button-main button-style-1" type="button">.</button>
                     <button id="btn-key-equals" class="button-main button-style-1" type="button">=</button>
                 </div>
             </div>    
         </div>
-
         <div id="wrapper-settings">
             <div id=container-wrapper-fx>
                 
@@ -78,9 +66,7 @@
                             <h4>Options</h4>
 
                         </div>
-                        <!--<div id="settings-title-close">-->
                             <button id="btn-settings-closex" type="button">X</button>
-                        <!--</div>-->
                     </div>
                     <div id="settings-contents">
                             <div id="settings-contents-options">

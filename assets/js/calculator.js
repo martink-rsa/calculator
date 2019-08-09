@@ -1,51 +1,215 @@
-// Only the addition functionality has been added.
+// Task: "Calculator" project for "The Odin Project" Web Development course.
+// URL: https://www.theodinproject.com/lessons/calculator
+// GitHub repo: https://github.com/martink-rsa/calculator
+// GitHub page: https://martink-rsa.github.io/calculator/calculator.html
+
+// **************
+// ISSUES / BUGS
+// **************
+// 1 ---
+// Same number being operated against itself is displaying the wrong information in the infoBar.
+// Calculator logic still outputs the correct number.
+//
+// User input: 1 + 1 + 1 +   // Result is 3 and 3 is displayed
+// infoBar: 1 + 2 + 3 +      // Appears to be taking the total 
+//
+// 2 ---
+// Calculator not resesting when user calculates a sum and:
+// * Presses an operator;
+// * Press a number.
+// The calculator should possibly do a soft reset by using the result as the left operand for further calculations,
+//      IF the user is not doing successive equal button presses.
+// 3 ---
+// Repeating different operator(s) needs to switch signs instead of trying to perform a calculation
+// Will currently result in 0 when repeated.
+
+// To-do:
+// Find and add functionality to empty "available" button.
+// 
+//
+
+// Ideas / considerations / to-do outside of normal development:
+//
+// Display:
+// * Format thousandth separators
+
+// Key Codes (JS Escape Sequence):
+//
+// +- \u00B1
+// sqrt \u221A
+// × \xD7
+// 
+
 function Calculator(){
     "use strict";
-
-    let operands = [];
-    let total = 0;
-    let operator = "";
-
-    let t = this;
-    let result = 0;
     
-    const add = function(total, n) {
-        return(total + n);
+    let operands = [], // left operand = operands[0], right operand = operands[1]
+        operator = "",
+        t = this,  
+        signs = [ // Array for substituting visually correct mathematical signs
+        ["*",
+        "/",
+        "sqrt"],
+        ["\xD7",
+        "\xF7",
+        "\u221A"]];
+    let stream = document.getElementById("container-display-stream");
+    let lastAction;
+    let infobar = document.getElementById("display-infobar");
+         
+
+    const calculate = function(n1, operator, n2){
+        let result;
+        if(operator == "+"){
+            result = parseFloat(n1) + parseFloat(n2);
+        } else if(operator == "-"){
+            result = parseFloat(n1) - parseFloat(n2);
+        } else if(operator == "*"){
+            result = parseFloat(n1) * parseFloat(n2);
+        } else if(operator == "/"){
+            result = parseFloat(n1) / parseFloat(n2);
+
+        // R.I.P other operators that were inlcuded in the initial design: %, sqrt, powX(root), pow3(cube)
+        // They require their own implementation checks as I planned to have visual changes.
+        // Will attempt to add them again at a later stage.
+
+        }
+        return result;
     }
 
-    const clearAll = function(){
-        document.getElementById("container-display-stream").textContent = "";
-        total = 0;
+    const input = function(e){
+
+        // C button
+        if(e.target.id == "btn-key-clear") {
+            lastAction = "clear";
+            resetCalculator();
+         
+        // Backspace Button
+        } else if(e.target.id == "btn-key-backspace") {
+            if(stream.textContent != "0"){
+                if(stream.textContent.length == 1)
+                    stream.textContent = "0";
+                else
+                    stream.textContent = stream.textContent.slice(0, stream.textContent.length - 1);
+            }
+
+        // = Button
+        } else if(e.target.id == "btn-key-equals") {
+            if (operands[0]){   
+                if(lastAction == "calculate"){
+                    operands[0] = formatInput(stream.textContent);                   
+                } else {
+                    operands[1] = formatInput(stream.textContent);
+                }
+                displayResult(calculate(operands[0],operator,operands[1]));
+                displayInfobar(operands[1],"=", stream.textContent);
+                lastAction = "calculate";
+            }
+            
+        // +- button
+        } else if(e.target.id == "btn-key-plusminus") {
+            stream.textContent *= -1;
+            lastAction = "plusminus";
+
+        // . button
+        } else if(e.target.id == "btn-key-decimal") {
+            if(!stream.textContent.includes("."))
+                stream.textContent += e.target.textContent;
+            lastAction = "decimal";
+
+        } else if(e.target.textContent >= "0" && e.target.textContent <= "9") {  
+            if(lastAction == "operator" || (stream.textContent == "0" && !operands[0])){
+                clearDisplay();
+            }
+            stream.textContent += e.target.textContent; 
+            lastAction = "number";
+
+        } else if(e.target.id == "btn-key-available") {
+            console.log("Available key: Working")
+                    
+        // All other controls
+        } else {
+            if(!operands[0] ){                  
+                operands[0] = formatInput(stream.textContent);
+                
+            }else{    
+                operands[1] = formatInput(stream.textContent);
+                displayResult(calculate(operands[0],operator,operands[1]));   
+            } 
+            
+            // Key presses
+            if(e.target.id == "btn-key-add")
+                operator = "+";
+            else if(e.target.id == "btn-key-minus")
+                operator = "-";
+            else if(e.target.id == "btn-key-multiply")
+                operator = "*";
+            else if(e.target.id == "btn-key-divide")
+                operator = "/";
+
+            operands[0] = formatInput(stream.textContent);
+            displayInfobar(operands[0], operator);
+            lastAction = "operator";
+        } 
     }
+
+    // Typically, the left operand and a operator are passed:
+    //      "1", "+"
+    // An exception is the equal sign being pressed, which passes
+    //      "5", "=", "6"
+    const displayInfobar = function(...args){
+        if(args[0] == "0" || args.includes("Infinity") ){ 
+            infobar.textContent = "0";
+        } else {
+            let s = "",
+                current = "",
+                equalsFound = 0;
+            
+            if(infobar.textContent == "0")
+                infobar.textContent = "";
+
+            for(let i = 0; i < args.length; i++){
+                current = args[i];
+
+                // Brackets no longer applied to negative numbers once the equal sign has been parsed
+                if(current == "=") 
+                    equalsFound = 1;
+                if(parseFloat(args[i]) <= 0 && !equalsFound){
+                    current = "(" + current + ")";
+                }
+
+                // Successive equal button presses will need an operand added 
+                // 56 + 5 = 61 5 = 66 should look like 56 + 5 = 61 + 5 = 66
+                if(lastAction == "calculate" && i == 0){
+                    current = operator + " " + current;
+                }
+
+                // Switch signs if the operator matches a replacement character
+                // / = ÷
+                if(signs[0].findIndex(v => v == current) != -1){
+                    current=signs[1][signs[0].findIndex(v => v == current)];
+                }
+
+                s += current + " ";
+            }    
+            infobar.textContent += s;
+        }       
+    } 
 
     const clearDisplay = function(){
-        document.getElementById("container-display-stream").textContent = "";
+        stream.textContent = "";
     }
 
-    const equals = function(){
-        console.log("Equals");
-        operands[1] = document.getElementById("container-display-stream").textContent;
-
-        if(operator == "+"){
-            displayResult(add(parseInt(operands[0]), parseInt(operands[1])));
-        }
-        // Add other operators here
+    const resetCalculator = function(){
+        operands[0] = "";
+        operands[1] = "";
+        displayResult("0");
+        infobar.textContent = "0";
     }
 
-    const input = function(e){   
-        if(e.target.id == "btn-key-clear") {
-            clearAll();
-        } else if(e.target.id == "btn-key-add") {
-            operands[0] = document.getElementById("container-display-stream").textContent;
-            operator = "+";
-            clearDisplay();
-        } else if(e.target.id == "btn-key-equals") {
-            equals();
-
-        // Add other button checks here
-        } else {  
-            document.getElementById("container-display-stream").textContent += e.target.textContent;     
-        }
+    const displayResult = function(r){
+       
+        stream.textContent = formatResult(r);   
     }
 
     const formatInput = function(s){
@@ -57,11 +221,9 @@ function Calculator(){
         // Format the result to include thousandth spacing
         return r;
     }
-
-    const displayResult = function(r){
-        document.getElementById("container-display-stream").textContent = formatResult(r);
-    }
     
+    // Should move events to it's own function.
+    // Events 
     let buttons = document.getElementsByClassName("button-main");
     for (let i = 0; i < buttons.length; i++) { 
         buttons[i].addEventListener("click", input);
@@ -131,4 +293,5 @@ function CalculatorUI(){
     }
     init();
 }
+
 CalculatorUI();

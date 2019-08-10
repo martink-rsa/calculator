@@ -15,7 +15,7 @@
 
 html, body{
     font-size: 40px;
-    background: royalblue;
+    background-color: rgba(144, 14, 253,.5);
 }
 
 #container-main {
@@ -148,14 +148,17 @@ html, body{
 }
 
 #container-controls{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-gap: 4px;
-    height: 100%;
+  height: 100%;
+  padding-bottom: 10px;
+}
 
-    padding: 10px;
-
+#controls{
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 4px; 
+  padding: 0px 10px 0px 10px;
 }
 
 /* HEADINGS */
@@ -383,8 +386,8 @@ input:checked + .slider:before {
   }
 
   #container-calculator{
-      height: 95vh;
-      width: 90vw;   
+      height: 95%;
+      width: 90%;   
       max-width: initial;
   }
 
@@ -397,6 +400,6 @@ input:checked + .slider:before {
   }  
   
   #container-settings{
-    width: 85vw;
+    width: 85%;
   }
 }

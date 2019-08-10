@@ -115,7 +115,7 @@ html, body{
 
 #container-display-settings{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     height: auto;
     font-size: 0.6rem;
     padding: 5px 5px 0 0;
@@ -272,11 +272,6 @@ input:checked + .slider:before {
         height: 95vh;
         width: 90vw;   
         max-width: initial;
-    }
-
-    #container-display{
-    
-        /*height: auto;*/
     }
 
     #container-controls{

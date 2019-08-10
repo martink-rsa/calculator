@@ -1,3 +1,6 @@
+/* Disabled top bar with logo (text + image) placeholders. They did not suit the design,
+      but it seemed more useful to disable them rather than delete them.*/
+
 :root{
     --colour-style1-base: rgba(230,230,230,0.7);
     --colour-style1-button1: rgba(240,240,240,.7);
@@ -75,6 +78,7 @@ html, body{
 }
 
 #container-topbar{
+    display: none;  
     display: flex; 
     height: 50px;
     width: 100%;
@@ -82,9 +86,12 @@ html, body{
 }
 
 #container-topbar-left{
+    display: none;
     display: flex;
     width: 100%;
     margin-left: 20px;
+    color: rgba(230,230,230,0.5);
+    z-index: 2;
 }
 
 #container-topbar-right{
@@ -109,8 +116,9 @@ html, body{
 }
 
 #container-display{
-    height: 200px;
+    height: auto;
     text-align: right;
+    
 }
 
 #container-display-settings{
@@ -122,17 +130,21 @@ html, body{
 }
 
 #display-infobar{
-    height: auto;
-    font-weight: 300;
-    font-size: 0.4rem;
-    text-align: right;
-    margin: 5px 10px 0 10px;
-    overflow: auto;
-    white-space: nowrap;
+  height: auto;
+  font-weight: 300;
+  font-size: 0.4rem;
+  text-align: right;
+  margin: 5px 10px 0 10px;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 #container-display-stream{
-    padding: 5px 10px 5px 0;
+  padding: 5px 10px;
+}
+
+#display-stream{
+  overflow: auto;
 }
 
 #container-controls{
@@ -141,7 +153,9 @@ html, body{
     grid-template-rows: repeat(5, 1fr);
     grid-gap: 4px;
     height: 100%;
+
     padding: 10px;
+
 }
 
 /* HEADINGS */
@@ -153,13 +167,20 @@ h4{
 
 /* LOGO */
 .logo-header{
-    font-size: 0.8rem;
-    margin: 0 5px;   
+    display: none;
+    font-size: 0.6rem;
+    margin: auto 5px;
+    color: var(--logo-colour);   
+    text-transform: uppercase;
 }
 
 /* IMAGES / FA ICONS */
-.img-fa-top{   
+.img-fa-top{
+    display: none;   
+    font-size: 0.4rem;
     background: none;
+    margin: auto 0;
+    color: var(--logo-colour);
 }
 
 .icon-settings-cog{
@@ -247,7 +268,7 @@ h4{
 }
   
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: rgba(144, 14, 253,.5);
 }
   
 input:focus + .slider {
@@ -260,28 +281,7 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
   
-@media (min-width: 320px) and (max-width: 880px) {
- 
-    #container-main{
-        justify-content: flex-start;
-        height: 100vh;
-        width: 100vw;
-    }
 
-    #container-calculator{
-        height: 95vh;
-        width: 90vw;   
-        max-width: initial;
-    }
-
-    #container-controls{
-        height: calc(100% - 200px);
-    }
-
-    #container-topbar{
-        display: none;
-    }   
-}
 
 /* SETTINGS WINDOW */
 
@@ -355,6 +355,7 @@ input:checked + .slider:before {
 .settings-text{
     font-size: 0.5rem;
     font-weight: 300;
+    margin-right: 5px;
 }
 
 #settings-close{
@@ -373,3 +374,29 @@ input:checked + .slider:before {
     opacity: 1 !important;
 }
 
+@media (min-width: 320px) and (max-width: 880px) {
+ 
+  #container-main{
+      justify-content: flex-start;
+      height: 100vh;
+      width: 100vw;
+  }
+
+  #container-calculator{
+      height: 95vh;
+      width: 90vw;   
+      max-width: initial;
+  }
+
+  #container-controls{
+      height: 100%;
+  }
+
+  #container-topbar{
+      display: none;
+  }  
+  
+  #container-settings{
+    width: 85vw;
+  }
+}
